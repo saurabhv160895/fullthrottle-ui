@@ -8,12 +8,12 @@
     line-height: 1.500em;
   }*/
 
-  .employeeDetails{
-    padding: 20px;
-  }
+.employeeDetails {
+	padding: 20px;
+}
 
-  .message{
-    margin: 10px 0;
-    font-family: 'Roboto', sans-serif; 
-    text-align: center;
-  }
+.message {
+	margin: 10px 0;
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+}
