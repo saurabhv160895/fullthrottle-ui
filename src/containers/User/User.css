@@ -1,4 +1,4 @@
-.Employee {
+.User {
 	width: 250px;
 	height: 150px;
 	border-radius: 10px;
@@ -13,11 +13,11 @@
 	cursor: pointer;
 }
 
-.Employee:hover {
+.User:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.Employee p {
+.User p {
 	font-family: "Roboto", sans-serif;
 }
 

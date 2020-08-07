@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import EmployeeDetails from "../../components/EmployeeDetails/EmployeeDetails";
+import UserDetails from "../../components/UserDetails/UserDetails";
 import Aux from "../../hoc/Auxiliary";
-import "./Employee.css";
+import "./User.css";
 import Modal from "react-modal";
-import { createObj } from "../../utils/utils";
+import {
+	createActvityPeriodObj,
+	checkIsActive,
+	getFormattedDate,
+} from "../../utils/utils";
 
 const customStyles = {
 	content: {
@@ -17,16 +21,16 @@ const customStyles = {
 };
 Modal.setAppElement("#root");
 
-class Employee extends Component {
+class User extends Component {
 	state = {
 		modalOpen: false,
 		date: new Date(),
 		activityPeriods: [],
 	};
 
-	employeeClickHandler = () => {
-		const activityPeriods = this.props.employee.activity_periods.map((el) => {
-			const obj = createObj(el);
+	userClickHandler = () => {
+		const activityPeriods = this.props.user.activity_periods.map((el) => {
+			const obj = createActvityPeriodObj(el); //Extracting activity data from json file and converting it to an object
 			return obj;
 		});
 
@@ -55,27 +59,16 @@ class Employee extends Component {
 
 		if (this.state.modalOpen) {
 			//console.log("modal open");
-			const selectedDate = this.state.date.getDate().toString();
-			const selectedMonth = this.state.date.toLocaleString("default", {
-				month: "short",
-			});
-			const selectedYear = this.state.date.getFullYear().toString();
-
-			isActive = this.state.activityPeriods.filter((el) => {
-				return (
-					el.month === selectedMonth &&
-					el.date === selectedDate &&
-					el.year === selectedYear
-				);
-			});
-			dateStr = `${selectedDate} ${selectedMonth} ${selectedYear}`;
+			isActive = checkIsActive(this.state.date, this.state.activityPeriods);
+			dateStr = getFormattedDate(this.state.date);
+			console.log(isActive);
 		}
 
 		return (
 			<Aux>
-				<div className="Employee" onClick={this.employeeClickHandler}>
-					<p className="name">{this.props.employee.real_name}</p>
-					<p>{this.props.employee.id}</p>
+				<div className="User" onClick={this.userClickHandler}>
+					<p className="name">{this.props.user.real_name}</p>
+					<p>{this.props.user.id}</p>
 				</div>
 
 				{this.state.modalOpen && (
@@ -93,12 +86,12 @@ class Employee extends Component {
 							<i className="far fa-times-circle"></i>
 						</span>
 
-						<EmployeeDetails
+						<UserDetails
 							date={this.state.date}
 							dateStr={dateStr}
 							isActive={isActive}
 							onChange={this.onChange}
-							employee={this.props.employee}
+							user={this.props.user}
 						/>
 					</Modal>
 				)}
@@ -107,4 +100,4 @@ class Employee extends Component {
 	}
 }
 
-export default Employee;
+export default User;

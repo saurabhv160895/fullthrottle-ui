@@ -2,9 +2,9 @@ import React from "react";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./EmployeeDetails.css";
+import "./UserDetails.css";
 
-const EmployeeDetails = (props) => {
+const UserDetails = (props) => {
 	let message = (
 		<div>
 			<span style={{ fontWeight: "bold" }}>
@@ -27,7 +27,7 @@ const EmployeeDetails = (props) => {
 	}
 
 	return (
-		<div className="employeeDetails">
+		<div className="userDetails">
 			<Calendar onChange={props.onChange} value={props.date} />
 			<div className="message">
 				<p>
@@ -39,4 +39,4 @@ const EmployeeDetails = (props) => {
 	);
 };
 
-export default EmployeeDetails;
+export default UserDetails;

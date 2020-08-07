@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "../../components/Header/Header";
-import Employee from "../Employee/Employee";
+import User from "../User/User";
 
 class App extends Component {
 	state = {
-		employees: [],
+		users: [],
 	};
 
 	componentDidMount() {
 		fetch("http://localhost:4000/members/")
 			.then((res) => res.json())
 			.then((res) => {
-				const employees = res.map((el, index) => {
+				const users = res.map((el, index) => {
 					return el;
 				});
-				//console.log(employees);
+				//console.log(users);
 				this.setState({
-					employees: employees,
+					users: users,
 				});
 			});
 	}
 
-	renderEmployees = () => {
-		const employees = this.state.employees.map((el, index) => (
+	renderUsers = () => {
+		const users = this.state.users.map((el, index) => (
 			<div key={index}>
-				<Employee employee={el} />
+				<User user={el} />
 			</div>
 		));
-		return <div className="employeeList">{employees}</div>;
+		return <div className="userList">{users}</div>;
 	};
 
 	render() {
 		return (
 			<div className="App">
 				<Header />
-				{this.renderEmployees()}
+				{this.renderUsers()}
 			</div>
 		);
 	}
